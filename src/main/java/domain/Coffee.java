@@ -13,7 +13,7 @@ import javax.persistence.NamedQuery;
 
 /**
  *
- * @author 878550
+ * @author rinke
  */
 @Entity
 @NamedQuery(name = "coffee.all", query ="SELECT c FROM Coffee c")
