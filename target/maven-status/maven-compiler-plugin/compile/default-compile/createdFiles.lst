@@ -1,0 +1,6 @@
+boundary\rest\CoffeeResource.class
+service\CoffeeService.class
+domain\Coffee.class
+dao\CoffeeDAO.class
+util\InitCoffee.class
+boundary\rest\JAXRSconfig.class
