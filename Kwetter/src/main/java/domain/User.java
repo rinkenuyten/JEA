@@ -10,8 +10,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 
 /**
@@ -21,7 +23,8 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "user.all", query ="SELECT u FROM User u"),
-@NamedQuery(name = "user.name", query ="SELECT u FROM User u WHERE u.name LIKE :userName")
+    @NamedQuery(name = "user.name", query ="SELECT u FROM User u WHERE u.name LIKE :userName"),
+    @NamedQuery(name = "user.tweets", query ="SELECT t FROM Tweet WHERE t.tweetOwner = :OwnerID")
 })
 
 public class User {
@@ -33,9 +36,18 @@ public class User {
     private String location;
     private String website;
     private String bio;
+    
+    @OneToMany(mappedBy = "user")
     private List<User> followers;
+    @OneToMany(mappedBy = "user")
     private List<User> following;
+    @OneToMany(mappedBy = "tweetOwner")
     private List<Tweet> tweets;
+    
+    @ManyToOne
+    private User user;
+    @ManyToOne
+    private Tweet tweet;
     
     public User(){
         

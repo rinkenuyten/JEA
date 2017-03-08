@@ -5,6 +5,7 @@
  */
 package util;
 
+import dao.TweetDAO;
 import dao.UserDAO;
 import domain.User;
 import javax.annotation.PostConstruct;
@@ -22,6 +23,9 @@ public class InitUser {
     
     @Inject
     UserDAO ud;
+    
+    @Inject
+    TweetDAO td;
     
     @PostConstruct
     public void init(){

@@ -13,12 +13,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author rinke
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "tweet.all", query ="SELECT t FROM Tweet t")
+})
 public class Tweet {
     
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +36,11 @@ public class Tweet {
     private String text;
     private Date timestamp;
     private int hearts;
+    
+    @ManyToOne
     private User tweetOwner;
+    
+    @OneToMany(mappedBy = "tweet")
     private List<User> hearters;
     
     public Tweet(){

@@ -7,6 +7,7 @@ package service;
 
 import dao.TweetDAO;
 import dao.UserDAO;
+import domain.Tweet;
 import domain.User;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -28,4 +29,8 @@ public class UserService {
     public List<User> getUserByName(String name){
         return ud.getUserByName(name);
     }
+    
+   /* public List<Tweet> getTweetsByUser(User user){
+        return ud.
+    };*/
 }

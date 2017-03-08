@@ -7,6 +7,7 @@ package dao;
 
 import domain.Tweet;
 import domain.User;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.PersistenceContext;
 import javax.persistence.EntityManager;
@@ -27,6 +28,10 @@ public class TweetDAO {
     
     public void delete(Tweet tweet){
         em.remove(tweet);
+    }
+    
+    public List<Tweet> allTweet(){
+        return em.createNamedQuery("tweet.all").getResultList();
     }
    
 }

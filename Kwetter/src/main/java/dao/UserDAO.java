@@ -5,6 +5,7 @@
  */
 package dao;
 
+import domain.Tweet;
 import domain.User;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -38,4 +39,8 @@ public class UserDAO {
         .setParameter("userName", name)
         .getResultList();
     }
+    
+    /*public List<Tweet> getTweetByUser(User user){
+        return em.
+    }*/
 }
