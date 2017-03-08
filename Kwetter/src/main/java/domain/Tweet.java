@@ -8,24 +8,19 @@ package domain;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 
 /**
  *
  * @author rinke
  */
 @Entity
-@NamedQueries({
-    @NamedQuery(name = "tweet.all", query ="SELECT t FROM Tweet t")
-})
+@NamedQuery(name = "tweet.all", query ="SELECT t FROM Tweet t")
 public class Tweet {
     
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,36 +28,48 @@ public class Tweet {
     
     private static final DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     
-    private String text;
-    private Date timestamp;
-    private int hearts;
+    private String tweetText;
+    private Date tweetTimestamp;
+    private int tweetHearts;
     
     @ManyToOne
     private User tweetOwner;
     
-    @OneToMany(mappedBy = "tweet")
-    private List<User> hearters;
+    //@OneToMany(mappedBy = "tweet")
+    //private List<User> hearters;
     
     public Tweet(){
         
     }
     
     public Tweet(String text, User owner){
-        this.text = text;
+        this.tweetText = text;
         this.tweetOwner = owner;
-        timestamp = new Date();
+        tweetTimestamp = new Date();
+    }
+    
+    public void setText(String text){
+        tweetText = text;
     }
     
     public String getText(){
-        return text;
+        return tweetText;
     }
         
+    public void setTimestamp(){
+        tweetTimestamp = new Date();
+    }
+    
     public String getTimestamp(){
-        return sdf.format(timestamp);
+        return sdf.format(tweetTimestamp);
     }
         
+    public void setHearts(int heart){
+        tweetHearts =+ heart;
+    }
+    
     public int getHearts(){
-        return hearts;
+        return tweetHearts;
     }
 
     public User getOwner(){
@@ -72,7 +79,7 @@ public class Tweet {
     public void setOwner(User owner){
         this.tweetOwner = owner;
     }
-    
+  /*  
     public void addHeart(User hearter){
         if(hearters.contains(hearter)){
             
@@ -81,4 +88,5 @@ public class Tweet {
         }
 
     }
+*/
 }

@@ -5,9 +5,7 @@
  */
 package service;
 
-import dao.TweetDAO;
 import dao.UserDAO;
-import domain.Tweet;
 import domain.User;
 import java.util.List;
 import javax.ejb.Stateless;

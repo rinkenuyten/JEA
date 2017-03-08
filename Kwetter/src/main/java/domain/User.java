@@ -5,12 +5,13 @@
  */
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -23,8 +24,7 @@ import javax.persistence.OneToMany;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "user.all", query ="SELECT u FROM User u"),
-    @NamedQuery(name = "user.name", query ="SELECT u FROM User u WHERE u.name LIKE :userName"),
-    @NamedQuery(name = "user.tweets", query ="SELECT t FROM Tweet WHERE t.tweetOwner = :OwnerID")
+    @NamedQuery(name = "user.name", query ="SELECT u FROM User u WHERE u.userName LIKE :userName")
 })
 
 public class User {
@@ -32,40 +32,37 @@ public class User {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
         
-    private String name;
+    private String userName;
     private String location;
     private String website;
     private String bio;
     
-    @OneToMany(mappedBy = "user")
+
+    @ManyToMany
     private List<User> followers;
-    @OneToMany(mappedBy = "user")
-    private List<User> following;
+    
     @OneToMany(mappedBy = "tweetOwner")
     private List<Tweet> tweets;
-    
-    @ManyToOne
-    private User user;
-    @ManyToOne
-    private Tweet tweet;
+    @ManyToMany(mappedBy = "followers")
+    private List<User> following;
     
     public User(){
         
     }
 
     public User(String name, String location, String website, String bio){
-        this.name = name;
+        this.userName = name;
         this.location = location;
         this.website = website;
         this.bio = bio;
     }
-    
-    public String getname(){
-        return name;
+
+    public String getUserName() {
+        return userName;
     }
-        
-    public void setName(String name){
-        this.name = name;
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
     
     public String getLocation(){
@@ -91,20 +88,36 @@ public class User {
     public void setBio(String bio){
         this.bio = bio;
     }
-    
-    public List<User> getFollowers(){
+
+    public List<User> getFollowers() {
         return followers;
     }
-    
-    public List<User> getFollowing(){
-        return following;
+
+    public void setFollowers(List<User> followers) {
+        this.followers = followers;
     }
-    
-    public List<Tweet> getTweets(){
+
+    public List<Tweet> getTweets() {
         return tweets;
     }
+
+    public void setTweets(List<Tweet> tweets) {
+        this.tweets = tweets;
+    }
+
+    public List<User> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(List<User> following) {
+        this.following = following;
+    }
+    
+   
     
     public void createTweet(Tweet tweet){
-        tweets.add(tweet);
+       if (tweets == null)
+           tweets = new ArrayList<>();
+       tweets.add(tweet);
     }
 }

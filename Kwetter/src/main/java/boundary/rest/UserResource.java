@@ -25,6 +25,7 @@ public class UserResource {
     
     @GET
     public List<User> allUser(){
-        return us.allUser();
+       List<User> result = us.allUser();
+       return result;
     }
 }

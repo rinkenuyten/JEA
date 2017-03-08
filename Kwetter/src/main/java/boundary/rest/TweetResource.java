@@ -3,25 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package service;
+package boundary.rest;
 
-import dao.TweetDAO;
 import domain.Tweet;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import service.TweetService;
 
 /**
  *
  * @author rinke
  */
 @Stateless
-public class TweetService {
-    
+@Path("tweet")
+public class TweetResource {
     @Inject
-    TweetDAO td;
+    TweetService ts;
     
+    @GET
     public List<Tweet> allTweet(){
-        return td.allTweet();
+        return ts.allTweet();
     }
 }
