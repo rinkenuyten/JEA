@@ -15,6 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlTransient;
 
 
 /**
@@ -39,11 +40,14 @@ public class User {
     
 
     @ManyToMany
+    @XmlTransient
     private List<User> followers;
     
     @OneToMany(mappedBy = "tweetOwner")
     private List<Tweet> tweets;
+    
     @ManyToMany(mappedBy = "followers")
+    @XmlTransient
     private List<User> following;
     
     public User(){
