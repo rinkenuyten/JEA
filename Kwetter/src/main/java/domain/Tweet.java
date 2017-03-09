@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -29,6 +30,8 @@ public class Tweet {
     private static final DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     
     private String tweetText;
+
+
     private Date tweetTimestamp;
     private int tweetHearts;
     
@@ -55,13 +58,13 @@ public class Tweet {
     public String getText(){
         return tweetText;
     }
-        
-    public void setTimestamp(){
-        tweetTimestamp = new Date();
-    }
     
-    public String getTimestamp(){
-        return sdf.format(tweetTimestamp);
+    public Date getTweetTimestamp() {
+        return tweetTimestamp;
+    }
+
+    public void setTweetTimestamp(Date tweetTimestamp) {
+        this.tweetTimestamp = tweetTimestamp;
     }
         
     public void setHearts(int heart){

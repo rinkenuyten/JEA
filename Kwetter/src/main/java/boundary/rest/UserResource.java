@@ -28,4 +28,18 @@ public class UserResource {
        List<User> result = us.allUser();
        return result;
     }
+   
+    @GET
+    @Path("/first")
+    public User allUsers(){
+       List<User> result = us.allUser();
+       return result.get(0);
+    }
+    
+       @GET
+    @Path("/followers")
+    public List<User> getfollowers(){
+       List<User> result = us.allUser();
+       return result.get(0).getFollowers();
+    }
 }

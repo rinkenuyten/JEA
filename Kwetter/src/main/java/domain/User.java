@@ -40,14 +40,12 @@ public class User {
     
 
     @ManyToMany
-    @XmlTransient
     private List<User> followers;
     
     @OneToMany(mappedBy = "tweetOwner")
     private List<Tweet> tweets;
     
     @ManyToMany(mappedBy = "followers")
-    @XmlTransient
     private List<User> following;
     
     public User(){
@@ -59,6 +57,9 @@ public class User {
         this.location = location;
         this.website = website;
         this.bio = bio;
+        
+        this.followers = new ArrayList<>();
+        this.following = new ArrayList<>();
     }
 
     public String getUserName() {
@@ -92,32 +93,28 @@ public class User {
     public void setBio(String bio){
         this.bio = bio;
     }
+   
 
     public List<User> getFollowers() {
         return followers;
-    }
-
-    public void setFollowers(List<User> followers) {
-        this.followers = followers;
     }
 
     public List<Tweet> getTweets() {
         return tweets;
     }
 
-    public void setTweets(List<Tweet> tweets) {
-        this.tweets = tweets;
-    }
-
     public List<User> getFollowing() {
         return following;
     }
-
-    public void setFollowing(List<User> following) {
-        this.following = following;
+    
+    public void addFollower(User user){
+        this.followers.add(user);
     }
     
-   
+    public void addFollowing(User user){
+        this.following.add(user);
+        user.addFollower(this);
+    }
     
     public void createTweet(Tweet tweet){
        if (tweets == null)

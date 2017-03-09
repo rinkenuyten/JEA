@@ -38,6 +38,8 @@ public class UserDAO {
         return em.createNamedQuery("findAllCustomersWithName")
         .setParameter("userName", name)
         .getResultList();
+        
+        //em.find(User.class, id)
     }
     
     /*public List<Tweet> getTweetByUser(User user){

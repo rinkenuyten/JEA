@@ -36,6 +36,8 @@ public class InitDatabase {
         Tweet tweet = new Tweet("TestTweet", user);
         //user.createTweet(tweet);
         //user2.createTweet(tweet2);
+        user.addFollowing(user2);
+        
         
         ud.save(user);
         ud.save(user2);
