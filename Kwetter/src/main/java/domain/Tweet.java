@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 
@@ -21,7 +22,11 @@ import javax.persistence.Temporal;
  * @author rinke
  */
 @Entity
-@NamedQuery(name = "tweet.all", query ="SELECT t FROM Tweet t")
+@NamedQueries({
+    @NamedQuery(name = "tweet.all", query ="SELECT t FROM Tweet t"),
+    @NamedQuery(name = "tweet.user", query ="SELECT t FROM Tweet t WHERE t.tweetOwner LIKE :tweetOwnerId") //Get tweet based on userid
+})
+
 public class Tweet {
     
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,8 +35,6 @@ public class Tweet {
     private static final DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     
     private String tweetText;
-
-
     private Date tweetTimestamp;
     private int tweetHearts;
     
@@ -49,6 +52,7 @@ public class Tweet {
         this.tweetText = text;
         this.tweetOwner = owner;
         tweetTimestamp = new Date();
+        owner.createTweet(this);
     }
     
     public void setText(String text){
