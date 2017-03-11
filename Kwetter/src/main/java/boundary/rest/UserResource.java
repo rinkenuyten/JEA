@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import service.UserService;
 
 /**
@@ -23,7 +24,7 @@ public class UserResource {
     @Inject
     UserService us;
     
-    /***
+    /**
      * Get all users
      * @return 
      */
@@ -40,22 +41,27 @@ public class UserResource {
        return result.get(0);
     }
     
-    /***
+    /**
      * Get all followers based on user ID
-     * @return 
+     * @param id id of the user whom's followers you want
+     * @return the users the user are following
      */
-    /*
     @GET
     @Path("/followers/{id}")
-    public List<User> getFollowers(){
+    public List<User> getFollowers(@PathParam("id") long id){
        List<User> result = us.allUser();
-       return result.get(0).getFollowers();
+       return result.get((int) id).getFollowers();
     }
-    /*
+    
+    /**
+     * Get all the users the user is following
+     * @param id id of the user
+     * @return the users the user is following
+     */
     @GET
     @Path("/following/{id}")
-    public List<User> getFollowing(){
-        List<User> result = us.
+    public List<User> getFollowing(@PathParam("id") long id){
+        List<User> result = us.allUser();
+        return result.get((int) id).getFollowing();
     }
-*/
 }

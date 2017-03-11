@@ -28,8 +28,15 @@ public class UserService {
         return ud.getUserByName(name);
     }
     
-    //public List<User> get
-   /*public List<Tweet> getTweetsByUser(User user){
-        return ud.
-    };*/
+    public User getUserById(Long id){
+        return ud.getUserById(id);
+    }
+    
+    public List<User> getFollowing(Long id){
+       return ud.getUserById(id).getFollowing();
+    }
+    
+    public List<User> getFollowers(Long id){
+        return ud.getUserById(id).getFollowers();
+    }
 }
