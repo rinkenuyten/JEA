@@ -36,7 +36,7 @@ public class UserResource {
        return result.get(0);
     }
     
-       @GET
+    @GET
     @Path("/followers")
     public List<User> getfollowers(){
        List<User> result = us.allUser();

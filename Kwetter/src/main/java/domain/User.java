@@ -15,7 +15,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.xml.bind.annotation.XmlTransient;
 
 
 /**
@@ -93,7 +92,6 @@ public class User {
     public void setBio(String bio){
         this.bio = bio;
     }
-   
 
     public List<User> getFollowers() {
         return followers;
