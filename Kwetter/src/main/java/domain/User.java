@@ -16,6 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 
 /**
@@ -23,6 +24,7 @@ import javax.persistence.OneToMany;
  * @author rinke
  */
 @Entity
+@Table(name = "KwetterUser")
 @NamedQueries({
     @NamedQuery(name = "user.all", query ="SELECT u FROM User u"),
     @NamedQuery(name = "user.name", query ="SELECT u FROM User u WHERE u.userName LIKE :userName")

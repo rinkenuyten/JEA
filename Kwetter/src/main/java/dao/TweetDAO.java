@@ -39,7 +39,6 @@ public class TweetDAO {
     }
     
     public List<Tweet> getTweetByUserId(Long id){
-        User u = em.find(User.class, id);
         return em.createNamedQuery("tweet.user")
         .setParameter("tweetOwner", id)
         .getResultList();
