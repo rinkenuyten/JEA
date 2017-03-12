@@ -40,7 +40,7 @@ public class InitDatabase {
 
         
         User user = new User("Lorenzo", "Nederland", "www.lorenzosuiker.nl", "2manybits", PasswordHash.stringToHash("Lorenzo"));
-        User user2 = new User("Fatih", "Eindhoven", "www.google.nl", "turkish", PasswordHash.stringToHash("Fatih"));
+        User user2 = new User("Fatih", "Eindhoven", "www.google.nl", "hoi", PasswordHash.stringToHash("Fatih"));
         user.addGroup(userGroup);
         user2.addGroup(adminGroup);
         Tweet tweet2 = new Tweet("TestTweet2", user2);

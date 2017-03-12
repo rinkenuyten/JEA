@@ -9,6 +9,7 @@ import dao.TweetDAO;
 import domain.Tweet;
 import java.util.List;
 import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -23,6 +24,7 @@ public class TweetService {
     @Inject
     TweetDAO td;
     
+    @RolesAllowed({"admin_role"})
     public List<Tweet> allTweet(){
         return td.allTweet();
     }

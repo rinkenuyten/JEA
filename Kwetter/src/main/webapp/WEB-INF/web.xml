@@ -9,17 +9,6 @@
         <auth-method>BASIC</auth-method>
         <realm-name>security_realm</realm-name>
     </login-config>
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name>Secure Pages</web-resource-name>
-            <description/>
-            <url-pattern>/api/user</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>regular_role</role-name>
-            <role-name>admin_role</role-name>
-        </auth-constraint>
-    </security-constraint>
     <security-role>
         <description/>
         <role-name>admin_role</role-name>

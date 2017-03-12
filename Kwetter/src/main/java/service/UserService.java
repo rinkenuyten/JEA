@@ -32,10 +32,12 @@ public class UserService {
         return ud.getUserByName(name);
     }
     
+    @RolesAllowed({"regular_role"})
     public User getUserById(Long id){
         return ud.getUserById(id);
     }
     
+    @RolesAllowed({"admin_role"})
     public List<User> getFollowing(Long id){
        return ud.getUserById(id).getFollowing();
     }
