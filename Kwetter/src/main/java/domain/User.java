@@ -8,6 +8,8 @@ package domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -59,6 +61,13 @@ public class User implements Serializable {
     }
 
     public User(String name, String location, String website, String bio, String password){
+        if(name == null || password == null){
+            try {
+                throw new Exception("Password or name is null (not allowed)");
+            } catch (Exception ex) {
+                Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         this.userName = name;
         this.location = location;
         this.website = website;
