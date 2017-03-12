@@ -8,6 +8,8 @@ package service;
 import dao.UserDAO;
 import domain.User;
 import java.util.List;
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 /**
@@ -15,11 +17,13 @@ import javax.inject.Inject;
  * @author rinke
  */
 @Stateless
+@DeclareRoles({"regular_role", "admin_role"})
 public class UserService {
     
     @Inject
     UserDAO ud;
     
+    @RolesAllowed({"admin_role"})
     public List<User> allUser(){
         return ud.allUser();
     }

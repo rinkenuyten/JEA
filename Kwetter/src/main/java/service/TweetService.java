@@ -8,6 +8,7 @@ package service;
 import dao.TweetDAO;
 import domain.Tweet;
 import java.util.List;
+import javax.annotation.security.DeclareRoles;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -16,6 +17,7 @@ import javax.inject.Inject;
  * @author rinke
  */
 @Stateless
+@DeclareRoles({"regular_role", "admin_role"})
 public class TweetService {
     
     @Inject

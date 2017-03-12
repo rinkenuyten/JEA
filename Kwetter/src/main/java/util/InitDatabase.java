@@ -5,8 +5,10 @@
  */
 package util;
 
+import dao.GroupDAO;
 import dao.TweetDAO;
 import dao.UserDAO;
+import domain.Group;
 import domain.Tweet;
 import domain.User;
 import javax.annotation.PostConstruct;
@@ -28,16 +30,26 @@ public class InitDatabase {
     @Inject
     TweetDAO td;
     
+    @Inject
+    GroupDAO gd;
+    
     @PostConstruct
     public void init(){
-        User user = new User("Lorenzo", "Nederland", "www.lorenzosuiker.nl", "2manybits");
-        User user2 = new User("Fatih", "Eindhoven", "www.google.nl", "turkish");
+        Group adminGroup = new Group("admins");
+        Group userGroup = new Group("regulars");
+
+        
+        User user = new User("Lorenzo", "Nederland", "www.lorenzosuiker.nl", "2manybits", PasswordHash.stringToHash("Lorenzo"));
+        User user2 = new User("Fatih", "Eindhoven", "www.google.nl", "turkish", PasswordHash.stringToHash("Fatih"));
+        user.addGroup(userGroup);
+        user2.addGroup(adminGroup);
         Tweet tweet2 = new Tweet("TestTweet2", user2);
         Tweet tweet = new Tweet("TestTweet", user);
 
         user.addFollowing(user2); //Lorenzo following Fatih
         
-        
+        gd.save(adminGroup);
+        gd.save(userGroup);
         ud.save(user);
         ud.save(user2);
         td.save(tweet);

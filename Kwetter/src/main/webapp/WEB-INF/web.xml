@@ -13,10 +13,19 @@
         <web-resource-collection>
             <web-resource-name>Secure Pages</web-resource-name>
             <description/>
-            <url-pattern>/*</url-pattern>
+            <url-pattern>/api/user</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>regular_role</role-name>
+            <role-name>admin_role</role-name>
         </auth-constraint>
     </security-constraint>
+    <security-role>
+        <description/>
+        <role-name>admin_role</role-name>
+    </security-role>
+    <security-role>
+        <description/>
+        <role-name>regular_role</role-name>
+    </security-role>
 </web-app>

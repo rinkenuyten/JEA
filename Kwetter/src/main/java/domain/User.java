@@ -35,6 +35,7 @@ public class User implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
         
+    
     private String userName;
     private String location;
     private String website;
@@ -57,14 +58,16 @@ public class User implements Serializable {
         
     }
 
-    public User(String name, String location, String website, String bio){
+    public User(String name, String location, String website, String bio, String password){
         this.userName = name;
         this.location = location;
         this.website = website;
         this.bio = bio;
+        this.password = password;
         
         this.followers = new ArrayList<>();
         this.following = new ArrayList<>();
+        this.groups = new ArrayList<>();
     }
 
     public String getPassword() {
@@ -81,6 +84,7 @@ public class User implements Serializable {
     
     public void addGroup(Group group){
         groups.add(group);
+        group.addUser(this);
     }
     public String getUserName() {
         return userName;
