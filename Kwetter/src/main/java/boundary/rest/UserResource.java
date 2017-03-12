@@ -35,10 +35,10 @@ public class UserResource {
     }
    
     @GET
-    @Path("/first")
-    public User allUsers(){
-       List<User> result = us.allUser();
-       return result.get(0);
+    @Path("/{id}")
+    public User allUsers(@PathParam("id") long id){
+       User result = us.getUserById(id);
+       return result;
     }
     
     /**
@@ -49,8 +49,8 @@ public class UserResource {
     @GET
     @Path("/followers/{id}")
     public List<User> getFollowers(@PathParam("id") long id){
-       List<User> result = us.allUser();
-       return result.get((int) id).getFollowers();
+       List<User> result = us.getFollowers(id);
+       return result;
     }
     
     /**
@@ -61,7 +61,7 @@ public class UserResource {
     @GET
     @Path("/following/{id}")
     public List<User> getFollowing(@PathParam("id") long id){
-        List<User> result = us.allUser();
-        return result.get((int) id).getFollowing();
+        List<User> result = us.getFollowing(id);
+        return result;
     }
 }
