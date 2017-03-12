@@ -45,4 +45,8 @@ public class UserService {
     public List<User> getFollowers(Long id){
         return ud.getUserById(id).getFollowers();
     }
+    
+    public void setDAO(UserDAO dao){
+        ud = dao;
+    }
 }

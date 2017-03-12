@@ -36,5 +36,9 @@ public class TweetService {
     public List<Tweet> getTweetByUserId(Long id){
         return td.getTweetByUserId(id);
     }
+    
+    public void setDAO(TweetDAO dao){
+        td = dao;
+    }
 }
 
