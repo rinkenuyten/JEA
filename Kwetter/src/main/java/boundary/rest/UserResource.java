@@ -36,7 +36,7 @@ public class UserResource {
    
     @GET
     @Path("/{id}")
-    public User allUsers(@PathParam("id") long id){
+    public User getUser(@PathParam("id") long id){
        User result = us.getUserById(id);
        return result;
     }

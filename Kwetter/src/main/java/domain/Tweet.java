@@ -5,6 +5,7 @@
  */
 package domain;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,10 +25,10 @@ import javax.persistence.Temporal;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "tweet.all", query ="SELECT t FROM Tweet t"),
-    @NamedQuery(name = "tweet.user", query ="SELECT t FROM Tweet t WHERE t.tweetOwner LIKE :tweetOwnerId") //Get tweet based on userid
+    @NamedQuery(name = "tweet.user", query ="SELECT t FROM Tweet t WHERE t.tweetOwner.id LIKE :tweetOwner") //Get tweet based on userid
 })
 
-public class Tweet {
+public class Tweet implements Serializable {
     
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

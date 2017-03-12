@@ -24,4 +24,13 @@ public class TweetService {
     public List<Tweet> allTweet(){
         return td.allTweet();
     }
+    
+    public Tweet getTweetById(Long id){
+        return td.getTweetById(id);
+    }
+    
+    public List<Tweet> getTweetByUserId(Long id){
+        return td.getTweetByUserId(id);
+    }
 }
+

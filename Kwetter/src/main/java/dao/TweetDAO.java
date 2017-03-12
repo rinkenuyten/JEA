@@ -34,4 +34,14 @@ public class TweetDAO {
         return em.createNamedQuery("tweet.all").getResultList();
     }
    
+    public Tweet getTweetById(Long id){
+        return em.find(Tweet.class, id);
+    }
+    
+    public List<Tweet> getTweetByUserId(Long id){
+        User u = em.find(User.class, id);
+        return em.createNamedQuery("tweet.user")
+        .setParameter("tweetOwner", id)
+        .getResultList();
+    }
 }

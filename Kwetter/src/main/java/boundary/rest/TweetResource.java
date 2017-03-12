@@ -6,11 +6,13 @@
 package boundary.rest;
 
 import domain.Tweet;
+import domain.User;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import service.TweetService;
 
 /**
@@ -26,5 +28,19 @@ public class TweetResource {
     @GET
     public List<Tweet> allTweet(){
         return ts.allTweet();
+    }
+    
+    @GET
+    @Path("/{id}")
+    public Tweet getTweet(@PathParam("id") long id){
+        Tweet tweet = ts.getTweetById(id);
+        return tweet;
+    }
+    
+    @GET
+    @Path("/user/{id}")
+    public List<Tweet> getTweetByUser(@PathParam("id") long id){
+        List<Tweet> tweets = ts.getTweetByUserId(id);
+        return tweets;
     }
 }

@@ -5,6 +5,7 @@
  */
 package domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
@@ -27,7 +28,7 @@ import javax.persistence.OneToMany;
     @NamedQuery(name = "user.name", query ="SELECT u FROM User u WHERE u.userName LIKE :userName")
 })
 
-public class User {
+public class User implements Serializable {
     
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
