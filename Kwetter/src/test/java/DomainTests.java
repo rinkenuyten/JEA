@@ -1,5 +1,3 @@
-package DomainTests;
-
 
 import domain.Tweet;
 import domain.User;
@@ -74,5 +72,16 @@ public class DomainTests {
         
         tweet.setText("test");
         assertEquals("user.settext is not correct", "test", tweet.getText());
+    }
+    
+    @Test
+    public void FollowerTest(){
+        User user = new User("Lorenzo", "Nederland", "www.lorenzosuiker.nl", "2manybits", PasswordHash.stringToHash("Lorenzo"));
+        User user2 = new User("Fatih", "Eindhoven", "www.google.nl", "hoi", PasswordHash.stringToHash("Fatih"));
+        
+        user.addFollowing(user2); //Lorenzo following Fatih
+        
+        assertEquals("addFollowing on user not correctly" , user, user2.getFollowers().get(0));
+        assertEquals("addFollwer on user not correctly" , user2, user.getFollowing().get(0));
     }
 }
