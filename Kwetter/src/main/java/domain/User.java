@@ -39,7 +39,10 @@ public class User implements Serializable {
     private String location;
     private String website;
     private String bio;
+    private String password;
     
+    @ManyToMany(mappedBy = "users")
+    private List<Group> groups;
 
     @ManyToMany
     private List<User> followers;
@@ -64,6 +67,21 @@ public class User implements Serializable {
         this.following = new ArrayList<>();
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<Group> getGroup(){
+        return groups;
+    }
+    
+    public void addGroup(Group group){
+        groups.add(group);
+    }
     public String getUserName() {
         return userName;
     }
