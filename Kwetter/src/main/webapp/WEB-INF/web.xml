@@ -5,16 +5,34 @@
             30
         </session-timeout>
     </session-config>
+    <security-constraint>
+        <display-name>Constraint1</display-name>
+        <web-resource-collection>
+            <web-resource-name>Secure Pages</web-resource-name>
+            <description/>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>admin</role-name>
+            <role-name>moderator</role-name>
+            <role-name>pleb</role-name>
+        </auth-constraint>
+    </security-constraint>
     <login-config>
         <auth-method>BASIC</auth-method>
         <realm-name>security_realm</realm-name>
     </login-config>
     <security-role>
-        <description/>
-        <role-name>admin_role</role-name>
+        <description>admin role</description>
+        <role-name>admin</role-name>
+    </security-role>
+    <security-role>
+        <description>you pleb</description>
+        <role-name>pleb</role-name>
     </security-role>
     <security-role>
         <description/>
-        <role-name>regular_role</role-name>
+        <role-name>moderator</role-name>
     </security-role>
 </web-app>

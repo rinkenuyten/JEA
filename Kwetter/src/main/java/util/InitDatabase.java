@@ -35,8 +35,8 @@ public class InitDatabase {
     
     @PostConstruct
     public void init(){
-        Group adminGroup = new Group("admins");
-        Group userGroup = new Group("regulars");
+        Group adminGroup = new Group("admin");
+        Group userGroup = new Group("pleb");
 
         
         User user = new User("Lorenzo", "Nederland", "www.lorenzosuiker.nl", "2manybits", PasswordHash.stringToHash("Lorenzo"));

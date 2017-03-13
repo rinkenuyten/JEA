@@ -18,13 +18,11 @@ import javax.inject.Inject;
  * @author rinke
  */
 @Stateless
-@DeclareRoles({"regular_role", "admin_role"})
 public class TweetService {
     
     @Inject
     TweetDAO td;
     
-    @RolesAllowed({"admin_role"})
     public List<Tweet> allTweet(){
         return td.allTweet();
     }

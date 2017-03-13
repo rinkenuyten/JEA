@@ -17,13 +17,11 @@ import javax.inject.Inject;
  * @author rinke
  */
 @Stateless
-@DeclareRoles({"regular_role", "admin_role"})
 public class UserService {
     
     @Inject
     UserDAO ud;
     
-    @RolesAllowed({"admin_role"})
     public List<User> allUser(){
         return ud.allUser();
     }
@@ -32,18 +30,20 @@ public class UserService {
         return ud.getUserByName(name);
     }
     
-    @RolesAllowed({"regular_role"})
     public User getUserById(Long id){
         return ud.getUserById(id);
     }
     
-    @RolesAllowed({"admin_role"})
     public List<User> getFollowing(Long id){
        return ud.getUserById(id).getFollowing();
     }
     
     public List<User> getFollowers(Long id){
         return ud.getUserById(id).getFollowers();
+    }
+    
+    public void newUser(User user){
+        ud.save(user);
     }
     
     public void setDAO(UserDAO dao){

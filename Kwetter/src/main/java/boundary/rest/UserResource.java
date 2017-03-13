@@ -5,14 +5,23 @@
  */
 package boundary.rest;
 
+import boundary.rest.parameters.UserBean;
 import domain.User;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import service.UserService;
+import util.PasswordHash;
 
 /**
  *
@@ -63,5 +72,14 @@ public class UserResource {
     public List<User> getFollowing(@PathParam("id") long id){
         List<User> result = us.getFollowing(id);
         return result;
+    }
+    
+    @POST
+    @Consumes("application/json")
+    @Path("/newUser")
+    @Produces(MediaType.TEXT_PLAIN)
+    public void newUser(final UserBean userbean){
+        User user = new User(userbean.name, userbean.location, userbean.website, userbean.bio, PasswordHash.stringToHash(userbean.password));
+        us.newUser(user);
     }
 }

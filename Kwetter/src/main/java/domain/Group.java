@@ -23,7 +23,11 @@ public class Group implements Serializable {
     private String groupName;
     
     @ManyToMany
-    @JoinTable(name="USER_GROUP")
+    @JoinTable(name="USER_GROUP",
+    joinColumns = @JoinColumn(name = "groupName",
+    referencedColumnName = "groupName"),
+    inverseJoinColumns = @JoinColumn(name = "userName",
+    referencedColumnName = "userName"))
     private List<User> users;
 
     public Group(){    
