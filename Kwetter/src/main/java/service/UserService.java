@@ -49,4 +49,18 @@ public class UserService {
     public void setDAO(UserDAO dao){
         ud = dao;
     }
+    
+    public boolean checkNameAvailability(String name){
+        return ud.checkNameAvailability(name);
+    }
+    
+    public void changeUserSettings(User user){
+        ud.merge(user);
+    }
+    
+    public void followUser(User user, User user2){
+        user.addFollowing(user2);
+        ud.merge(user);
+        ud.merge(user2);
+    }
 }

@@ -6,7 +6,9 @@
 package service;
 
 import dao.TweetDAO;
+import dao.UserDAO;
 import domain.Tweet;
+import domain.User;
 import java.util.List;
 import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.RolesAllowed;
@@ -23,6 +25,9 @@ public class TweetService {
     @Inject
     TweetDAO td;
     
+    @Inject
+    UserDAO ud;
+    
     public List<Tweet> allTweet(){
         return td.allTweet();
     }
@@ -37,6 +42,11 @@ public class TweetService {
     
     public void setDAO(TweetDAO dao){
         td = dao;
+    }
+    
+    public void createTweet(String text, User user){
+        Tweet tweet = new Tweet(text, user);
+        td.save(tweet);
     }
 }
 

@@ -30,6 +30,10 @@ public class UserDAO {
         em.remove(user);
     }
     
+    public void merge(User user){
+        em.merge(user);
+    }
+    
     public List<User> allUser(){
         return em.createNamedQuery("user.all").getResultList();
     }
@@ -42,5 +46,12 @@ public class UserDAO {
     
     public User getUserById(Long id){
         return em.find(User.class, id);
+    }
+    
+    public boolean checkNameAvailability(String name){
+        List<User> users = em.createNamedQuery("user.namecheck")
+        .setParameter("userName", name)
+        .getResultList();
+        return users.isEmpty();
     }
 }

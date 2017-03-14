@@ -37,12 +37,17 @@ public class InitDatabase {
     public void init(){
         Group adminGroup = new Group("admin");
         Group userGroup = new Group("pleb");
+        Group moderatorGroup = new Group("moderator");
 
         
         User user = new User("Lorenzo", "Nederland", "www.lorenzosuiker.nl", "2manybits", PasswordHash.stringToHash("Lorenzo"));
         User user2 = new User("Fatih", "Eindhoven", "www.google.nl", "hoi", PasswordHash.stringToHash("Fatih"));
+        User user3 = new User("Rinke", "Nederland", "www.google.nl", "mijn bio", PasswordHash.stringToHash("Rinke"));
+        
+        
         user.addGroup(userGroup);
         user2.addGroup(adminGroup);
+        user3.addGroup(userGroup);
         Tweet tweet2 = new Tweet("TestTweet2", user2);
         Tweet tweet = new Tweet("TestTweet", user);
 
@@ -52,6 +57,7 @@ public class InitDatabase {
         gd.save(userGroup);
         ud.save(user);
         ud.save(user2);
+        ud.save(user3);
         td.save(tweet);
         td.save(tweet2);
     }

@@ -30,7 +30,8 @@ import javax.persistence.Table;
 @Table(name = "KwetterUser")
 @NamedQueries({
     @NamedQuery(name = "user.all", query ="SELECT u FROM User u"),
-    @NamedQuery(name = "user.name", query ="SELECT u FROM User u WHERE u.userName LIKE :userName")
+    @NamedQuery(name = "user.name", query ="SELECT u FROM User u WHERE u.userName LIKE :userName"),
+    @NamedQuery(name = "user.namecheck", query="SELECT u FROM User u WHERE u.userName = :userName")
 })
 
 public class User implements Serializable {
