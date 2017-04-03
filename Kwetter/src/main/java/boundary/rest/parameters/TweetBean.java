@@ -15,5 +15,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class TweetBean {
     
+    @XmlElement public Long userId;
     @XmlElement public String text; 
 }

@@ -6,20 +6,13 @@
     <h:head>
         <title>Facelet Title</title>
     </h:head>
-    <form action="j_security_check" method="POST">
-        <h:outputLabel for="j_username">#{bundle['login.username']}:</h:outputLabel>
-        <h:inputText id="j_username" size="20" />
-
-        <h:outputLabel for="j_password">#{bundle['login.password']}:</h:outputLabel>
-        <h:inputSecret id="j_password" size="20"/>
-
-        <input type="submit" value="#{bundle['login.submit']}" />
-    </form>
     
-    <h:body>
+
+    
+    <h:body> 
+        
         Hello from Facelets
         
-        Welcome : #{tweetController.welcome}
         
         <br/>
         <br/>

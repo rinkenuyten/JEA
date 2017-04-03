@@ -48,6 +48,14 @@ public class Tweet implements Serializable {
     public Tweet(){
         
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
     
     public Tweet(String text, User owner){
         this.tweetText = text;

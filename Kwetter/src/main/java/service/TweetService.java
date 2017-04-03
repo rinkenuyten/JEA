@@ -9,9 +9,8 @@ import dao.TweetDAO;
 import dao.UserDAO;
 import domain.Tweet;
 import domain.User;
+import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.security.DeclareRoles;
-import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -27,6 +26,10 @@ public class TweetService {
     
     @Inject
     UserDAO ud;
+    
+    public void save(Tweet tweet){
+        td.save(tweet);
+    }
     
     public List<Tweet> allTweet(){
         return td.allTweet();
@@ -44,9 +47,20 @@ public class TweetService {
         td = dao;
     }
     
-    public void createTweet(String text, User user){
+    public Tweet createTweet(String text, User user){
         Tweet tweet = new Tweet(text, user);
         td.save(tweet);
+        return tweet;
+    }
+    
+    public List<Tweet> getFeed(String username){
+        List<Tweet> feedlist = new ArrayList<>();
+        User u = ud.getUserByName(username).get(0);
+            for (User user : u.getFollowing()) {
+                List<Tweet> result = this.getTweetByUserId(user.getId());
+                feedlist.addAll(result);
+            }
+        return feedlist;
     }
 }
 

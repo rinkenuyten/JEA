@@ -44,7 +44,6 @@ public class InitDatabase {
         User user2 = new User("Fatih", "Eindhoven", "www.google.nl", "hoi", PasswordHash.stringToHash("Fatih"));
         User user3 = new User("Rinke", "Nederland", "www.google.nl", "mijn bio", PasswordHash.stringToHash("Rinke"));
         
-        
         user.addGroup(userGroup);
         user2.addGroup(adminGroup);
         user3.addGroup(userGroup);

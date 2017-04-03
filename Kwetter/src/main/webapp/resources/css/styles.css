@@ -1,0 +1,50 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 01-Apr-2017, 18:18:05
+    Author     : rinke
+*/
+.bannerpic 
+{
+    width:  480px;
+    height: 180px;
+}
+
+.topban
+{
+    background-color: dimgray;
+    text-align: center;
+    height: 180px;
+}
+
+.profileinfo
+{
+    background-color: azure;
+    display: inline-block;
+    width:120px;
+}
+
+.tweets
+{
+    vertical-align:top;
+    background-color: mistyrose;
+    display: inline-block;
+    width: 40%;
+}
+
+.followers
+{
+    width: 20%;
+    display: inline-block;
+    vertical-align: right;
+}
+
+.following
+{
+    width: 20%;
+    display: inline-block;
+    vertical-align:right; 
+}

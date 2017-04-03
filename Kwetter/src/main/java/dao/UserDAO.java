@@ -39,7 +39,7 @@ public class UserDAO {
     }
     
     public List<User> getUserByName(String name){
-        return em.createNamedQuery("findAllCustomersWithName")
+        return em.createNamedQuery("user.name")
         .setParameter("userName", name)
         .getResultList();
     }

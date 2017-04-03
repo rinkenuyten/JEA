@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,7 +31,7 @@ import javax.persistence.Table;
 @Table(name = "KwetterUser")
 @NamedQueries({
     @NamedQuery(name = "user.all", query ="SELECT u FROM User u"),
-    @NamedQuery(name = "user.name", query ="SELECT u FROM User u WHERE u.userName LIKE :userName"),
+    @NamedQuery(name = "user.name", query ="SELECT u FROM User u WHERE u.userName = :userName"),
     @NamedQuery(name = "user.namecheck", query="SELECT u FROM User u WHERE u.userName = :userName")
 })
 
@@ -155,4 +156,14 @@ public class User implements Serializable {
            tweets = new ArrayList<>();
        tweets.add(tweet);
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    
 }

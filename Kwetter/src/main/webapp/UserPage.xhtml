@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet name = "css/styles.css" />
+    </h:head>
+    
+    
+    <h:body>
+         
+         #{userController.setUserByURL()}
+         #{tweetController.fillListOwner(userController.user.id)}
+         #{userController.fillFollowers()}
+         #{userController.fillFollowing()}
+        <div class="content">
+                <h:form>
+                    <p:commandButton value="log out" actionListener="#{userController.logOut()}" ajax="false"/>
+                </h:form>
+                <a href="Dashboard.xhtml">My dashboard</a>
+		<div class="topban">
+			<div class="content">
+                            <img class="bannerpic" src="http://i.imgur.com/C1hMH2J.png" alt=""/>
+			</div>
+		</div>
+                <div class="wrapper">
+                    <div class="profileinfo">
+                            <div class="content">
+                                #{userController.userName} <br></br>
+                                #{userController.user.bio} <br></br>
+                                #{userController.user.location} <br></br>
+                                #{userController.user.website} <br></br>
+                            </div>
+                    </div>
+                    <div class="tweets">
+                            <div class="content">
+                                <h:form>
+                                    <p:dataTable id="list" var="tweet" value="#{tweetController.tweetList}">
+                                        <p:column headerText="Tweettext">
+                                            <h:outputText value="#{tweet.text}" />
+                                        </p:column>
+
+                                        <p:column headerText="Time">
+                                            <h:outputText value="#{tweet.tweetTimestamp}" />
+                                        </p:column>
+
+                                    </p:dataTable>
+                                </h:form>
+                            </div>
+                    </div>
+                    <div class="followers">
+                        <div class="content">
+                                <h:form>
+                                    <p:dataTable id="followerList" var="user" value="#{userController.followers}">
+                                        <p:column headerText="Followers">
+                                            <a href="UserPage.xhtml?username=#{user.userName}">#{user.userName}</a>
+                                        </p:column>
+
+                                    </p:dataTable>
+                                </h:form>
+                        </div>
+                    </div>
+                    <div class="following">
+                        <div class="content">
+                                <h:form>
+                                    <p:dataTable id="followingList" var="user" value="#{userController.following}">
+                                        <p:column headerText="Following">
+                                            <a href="UserPage.xhtml?username=#{user.userName}">#{user.userName}</a>
+                                        </p:column>
+
+                                    </p:dataTable>
+                                </h:form>
+                        </div>
+                    </div>
+                </div>
+	</div>
+        
+        <!-- FacesContext.getCurrentInstance().getGetExternalCOntext.GetRemoteUser(); -->
+    </h:body>
+</html>
+
