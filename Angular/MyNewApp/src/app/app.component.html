@@ -1,5 +1,9 @@
   <input type="text"  [(ngModel)]="username"> 
   <a [routerLink]="['/user', username]">user</a>
+  <div class="lang-bar">
+  <a (click)="changeLang('en')">EN</a>
+  <a (click)="changeLang('nl')">NL</a>
+  </div>
 <body>
   <h1>
   </h1>

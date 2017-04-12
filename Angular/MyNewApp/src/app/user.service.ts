@@ -72,7 +72,7 @@ export class UserService {
 
   postTweet(id: number, message: string): Observable<boolean> {
     console.log(id + " " + message);
-    return this.http.post(`${this.baseUrl}/tweet/` + id + '/' + message, { headers: this.getPostHeaders() }).map(r => {
+    return this.http.post(`${this.baseUrl}/tweet/` + id + '/' + message,{ headers: this.getPostHeaders() }).map(r => {
       console.log(r);
       return true;
     });

@@ -1,0 +1,8 @@
+{
+ "User Details" : "User Details",
+ "Date" : "Date",
+ "Message" : "Message",
+ "Followers" : "Followers",
+ "Following" : "Following"
+ 
+}

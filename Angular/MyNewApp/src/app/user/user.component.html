@@ -9,7 +9,7 @@
   <div class="profileinfo">
     <div class="content">
       <div *ngIf=isloaded>
-        User details<br/>
+        {{ "User Details" | translate }}<br/>
         {{LoggedUser.username}}<br/>
         {{LoggedUser.bio}}<br/>
         {{LoggedUser.location}}<br/>
@@ -22,8 +22,8 @@
             <div *ngIf=isloaded>
                 <table>
                 <tr>
-                    <td>Date</td>
-                    <td>Message</td>
+                    <td>{{ "Date" | translate }}</td>
+                    <td>{{ "Message" | translate }}</td>
                 </tr>
                 <tr *ngFor="let tweet of tweetList">
                     <td>{{tweet.tweetTimestamp}}</td>
@@ -38,7 +38,7 @@
             <div *ngIf=isloaded>
                 <table>
                 <tr>
-                    <td>Followers</td>
+                    <td>{{ "Followers" | translate }}</td>
                 </tr>
                 <tr *ngFor="let user of followers">
                     <a href="http://localhost:4200/#/user/{{user.username}}">{{user.username}}</a>
@@ -52,7 +52,7 @@
             <div *ngIf=isloaded>
                 <table>
                 <tr>
-                    <td>Following</td>
+                    <td>{{ "Following" | translate }}</td>
                 </tr>
                 <tr *ngFor="let user of following">
                     <a href="http://localhost:4200/#/user/{{user.username}}">{{user.username}}</a>
