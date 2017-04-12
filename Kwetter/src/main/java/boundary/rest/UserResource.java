@@ -28,7 +28,6 @@ import util.PasswordHash;
  */
 @Stateless
 @Path("user")
-@DeclareRoles({"admin", "pleb", "moderator"})
 public class UserResource {
     @Inject
     UserService us;
@@ -44,11 +43,11 @@ public class UserResource {
     }
    
     @GET
-    @RolesAllowed({"pleb"})
-    @Path("/{id}")
-    public User getUser(@PathParam("id") long id){
-       User result = us.getUserById(id);
-       return result;
+    @Path("/{name}")
+    public User getUser(@PathParam("name") String name){
+       List<User> result = us.getUserByName(name);
+       User user = result.get(0);
+       return user;
     }
     
     /**
@@ -78,7 +77,6 @@ public class UserResource {
     @POST
     @Consumes("application/json")
     @Path("/newUser")
-    @RolesAllowed({"admin"})
     @Produces(MediaType.TEXT_PLAIN)
     public boolean newUser(final UserBean userbean){
         boolean check = us.checkNameAvailability(userbean.name);

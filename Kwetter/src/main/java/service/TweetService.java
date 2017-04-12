@@ -53,6 +53,13 @@ public class TweetService {
         return tweet;
     }
     
+    public Tweet CreateTweetByUserName(String text, String username){
+        User u = ud.getUserByName(username).get(0);
+        Tweet tweet = new Tweet(text, u);
+        td.save(tweet);
+        return tweet;
+    }
+    
     public List<Tweet> getFeed(String username){
         List<Tweet> feedlist = new ArrayList<>();
         User u = ud.getUserByName(username).get(0);

@@ -57,11 +57,22 @@ public class TweetResource {
         return tweets;
     }
     
+    @GET
+    @Path("user/{username}")
+    public List<Tweet> getTweetByUserName(@PathParam("name") String name){
+        List<User> result = us.getUserByName(name);
+        User user = result.get(0);
+        List<Tweet> tweets = ts.getTweetByUserId(user.getId());
+        return tweets;
+    }
+    
+    
     @POST
-    @Path("{id}/post")
-    public void add(@PathParam("id") long id, final TweetBean tweetbean){
+    @Path("{id}/{text}")
+    public void add(@PathParam("id") long id, @PathParam("text") String texttweet){
         User result = us.getUserById(id);
-        ts.createTweet(tweetbean.text, result);
+        System.out.println(texttweet);
+        ts.createTweet(texttweet, result);
     }
     
     @POST

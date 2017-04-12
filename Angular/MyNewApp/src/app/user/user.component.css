@@ -1,0 +1,40 @@
+.bannerpic 
+{
+    width:  480px;
+    height: 180px;
+}
+
+.topban
+{
+    background-color: dimgray;
+    text-align: center;
+    height: 180px;
+}
+.profileinfo
+{
+    background-color: azure;
+    display: inline-block;
+    width:120px;
+}
+
+.tweets
+{
+    vertical-align:top;
+    background-color: mistyrose;
+    display: inline-block;
+    width: 40%;
+}
+
+.followers
+{
+    width: 20%;
+    display: inline-block;
+    vertical-align: right;
+}
+
+.following
+{
+    width: 20%;
+    display: inline-block;
+    vertical-align:right; 
+}

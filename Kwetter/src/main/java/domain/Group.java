@@ -22,7 +22,7 @@ public class Group implements Serializable {
     @Id
     private String groupName;
     
-    @ManyToMany
+    @ManyToMany (cascade = CascadeType.PERSIST)
     @JoinTable(name="USER_GROUP",
     joinColumns = @JoinColumn(name = "groupName",
     referencedColumnName = "groupName"),

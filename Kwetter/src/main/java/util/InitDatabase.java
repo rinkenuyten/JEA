@@ -43,14 +43,21 @@ public class InitDatabase {
         User user = new User("Lorenzo", "Nederland", "www.lorenzosuiker.nl", "2manybits", PasswordHash.stringToHash("Lorenzo"));
         User user2 = new User("Fatih", "Eindhoven", "www.google.nl", "hoi", PasswordHash.stringToHash("Fatih"));
         User user3 = new User("Rinke", "Nederland", "www.google.nl", "mijn bio", PasswordHash.stringToHash("Rinke"));
+        User user4 = new User("Ken", "Nederland", "www.google.com", "bio", PasswordHash.stringToHash("Ken"));
+        
         
         user.addGroup(userGroup);
         user2.addGroup(adminGroup);
         user3.addGroup(userGroup);
+        user4.addGroup(userGroup);
+        
         Tweet tweet2 = new Tweet("TestTweet2", user2);
         Tweet tweet = new Tweet("TestTweet", user);
 
         user.addFollowing(user2); //Lorenzo following Fatih
+        user2.addFollowing(user);
+        user3.addFollowing(user2);
+        user4.addFollowing(user2);
         
         gd.save(adminGroup);
         gd.save(userGroup);

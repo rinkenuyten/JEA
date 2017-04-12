@@ -1,0 +1,86 @@
+<div class="topban">
+    <div class="content">
+        <img class="bannerpic" src="http://i.imgur.com/C1hMH2J.png" alt=""/>
+    </div>
+</div>
+  <!--{{LoggedUser | json}}-->
+  
+<div class="wrapper">
+  <div class="profileinfo">
+    <div class="content">
+      <div *ngIf=isloaded>
+        User details<br/>
+        {{LoggedUser.username}}<br/>
+        {{LoggedUser.bio}}<br/>
+        {{LoggedUser.location}}<br/>
+        {{LoggedUser.website}}<br/>
+      </div>
+    </div>
+  </div>
+  <div class="tweets">
+          <div class="content">
+            <div *ngIf=isloaded>
+                <table>
+                <tr>
+                    <td>Date</td>
+                    <td>Message</td>
+                </tr>
+                <tr *ngFor="let tweet of tweetList">
+                    <td>{{tweet.tweetTimestamp}}</td>
+                    <td>{{tweet.tweetText}}</td>
+                </tr>
+                </table>
+            </div>
+          </div>
+  </div>
+  <div class="followers">
+      <div class="content">
+            <div *ngIf=isloaded>
+                <table>
+                <tr>
+                    <td>Followers</td>
+                </tr>
+                <tr *ngFor="let user of followers">
+                    <a href="http://localhost:4200/#/user/{{user.username}}">{{user.username}}</a>
+                </tr>
+                </table>
+            </div>
+      </div>
+  </div>
+  <div class="following">
+      <div class="content">
+            <div *ngIf=isloaded>
+                <table>
+                <tr>
+                    <td>Following</td>
+                </tr>
+                <tr *ngFor="let user of following">
+                    <a href="http://localhost:4200/#/user/{{user.username}}">{{user.username}}</a>
+                </tr>
+                </table>
+            </div>
+      </div>
+  </div>
+</div>
+
+<label for="inputTweet">Tweet:</label>
+<input type="text" id="inputTweet" [(ngModel)]="tweetMessage">
+<button (click)="postTweet(tweetMessage)">Post tweet</button>
+
+
+
+
+
+
+
+
+
+
+
+
+<div>
+  <!--Click to load users <button (click)="loadUsers()">load</button><br/> {{userList | json}}-->
+</div>
+<div>
+  <!--Click to load Tweets <button (click)="loadTweets()">load</button><br/> {{viewingTweets | json}}-->
+</div>
