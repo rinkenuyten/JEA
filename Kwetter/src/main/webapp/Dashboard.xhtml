@@ -7,8 +7,8 @@
         <title>Facelet Title</title>
         <h:outputStylesheet name = "css/styles.css" />
     </h:head>
-    
-    
+    <meta charset="utf-8" /> 
+=
     <h:body>
          #{userController.check()}
          #{tweetController.checkUser()}
@@ -84,10 +84,85 @@
                         <p:inputTextarea value="#{tweetController.tweettext}"></p:inputTextarea>
                         
                         <p:commandButton value="Posttweet" actionListener="#{tweetController.makeTweet()}"/>
+                    
+                    <input id="textforws" type="text"></input>
+                    <button id="sendButton" onclick='doSend(document.getElementById("textforws").value);'>send</button>
                     </h:form>
+                    
+                    
+                    <div id="output"/>
                 </div>
 	</div>
         
+                
+<script>
+    //references #output
+    var output;
+    
+    //connects the websocket and inits ouput
+    function init() {
+        output = document.getElementById("output");
+        websocket = new WebSocket("ws://localhost:8080/Kwetter/socket?#{userController.userName}");
+        websocket.onopen = function(evt){
+            onOpen(evt);
+        };
+        websocket.onclose = function(evt){
+            onClose(evt);
+        };
+        websocket.onmessage = function(evt){
+            onMessage(evt);
+        };
+        websocket.onerror = function(evt){
+            onError(evt);
+        };
+    }
+    
+    //define event handlers
+    function onOpen(evt) {
+        writeToScreen("CONNECTED");
+    }
+    function onWindowClose(evt){
+        websocket.close();
+    }
+    function onClose(evt){
+        writeToScreen("DISCONNECTED");
+    }
+    function onMessage(evt){
+        //convert json to javascript object
+        var message = JSON.parse(evt.data);
+        //write message.text to screen
+        writeToScreen('<span style="color: green;">RESPONSE: ' + message.text + '</span>');
+    }
+    
+    function onError(event){
+        writeToScreen('<span style="color: red;">ERROR:</span> ' + event.data);
+    }
+    
+    function doSend(message){
+        writeToScreen("SENT: " + message);
+        var json = message;
+        websocket.send(json);
+    }
+    
+    //appends text to #output
+    function writeToScreen(text) {
+        var pre = document.createElement("p");
+        pre.style.wordWrap = "break-word";
+        pre.innerHTML = text;
+        output.appendChild(pre);
+    }
+    
+    //invoke init() on load
+    window.addEventListener("load", init, false);
+    
+    //handles [Enter] in #textforws/clicks on #sendButton
+    function keyPressed(event){
+        if(event.keyCode === 13){
+            document.getElementById("sendButton").click();
+            document.getElementById("textforws").value='';
+        }
+    }
+</script>
         <!-- FacesContext.getCurrentInstance().getGetExternalCOntext.GetRemoteUser(); -->
     </h:body>
 </html>

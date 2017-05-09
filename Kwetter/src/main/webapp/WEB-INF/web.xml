@@ -28,7 +28,21 @@
             <description/>
             <url-pattern>/*</url-pattern>
         </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>admin</role-name>
+            <role-name>pleb</role-name>
+            <role-name>moderator</role-name>
+        </auth-constraint>
     </security-constraint>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>security_realm</realm-name>
+        <form-login-config>
+            <form-login-page>/Login.xhtml</form-login-page>
+            <form-error-page>/Error.xhtml</form-error-page>
+        </form-login-config>
+    </login-config>
     <security-role>
         <description>admin role</description>
         <role-name>admin</role-name>

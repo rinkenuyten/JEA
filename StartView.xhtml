@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Startpagina</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:panel id="panel" header="Tweets zoeken" style="margin-bottom:10px;">
+                <p:messages id="messages" />
+
+                <h:panelGrid columns="4" cellpadding="5">
+                    <h:outputLabel value="Zoekterm: " />
+                    <p:inputText value="#{startController.searchTerm}" label="Zoekterm: ">
+                    </p:inputText>
+                    <p:commandButton value="Zoeken" id="nonAjax" actionListener="#{startController.search}" ajax="false" />
+                </h:panelGrid>
+            </p:panel>
+
+            <p:dataTable styleClass="deTabelderTabellen" id="resultlist" var="kweet" value="#{startController.searchResults}" rendered="#{startController.searchResults.size() != 0}">
+                <p:column headerText="Kweet">
+                    <h:outputText value="#{kweet.content}" />
+                </p:column>
+
+                <p:column headerText="Kweeter">
+                    <h:outputText value="#{kweet.kweeter.username}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+        <h:form>
+            <p:layout style="min-width:400px;min-height:500px;">
+                <p:layoutUnit position="west" resizable="true" size="750">
+                    <p:panel id="newKweetPanel" header="Kweet toevoegen" style="margin-bottom:10px;">
+
+                        <h:panelGrid columns="4" cellpadding="5">
+                            <h:outputLabel value="Nieuwe kweet: " />
+                            <p:inputText id="newKweetContent" styleClass="tbNewKweet" value="#{startController.newKweetContent}" label="Nieuwe kweet: ">
+                            </p:inputText>
+                            <p:commandButton value="Kweet!" id="addKweet" onclick="sendKweet()" actionListener="#{startController.addKweet}" ajax="false" />
+                        </h:panelGrid>
+                    </p:panel>
+                    <br></br>
+                    <p:socket onMessage="handleMessage" channel="/kweetsocket?#{startController.user.id}" />
+ 
+                    Timeline
+                    <p:dataTable styleClass="timelineTable"  value="#{startController.timeline}" var="kweet">
+                        <p:column headerText="User">
+                            <a href="#{startController.getProfileUrl(kweet.kweeter)}"> <h:outputText value="#{kweet.kweeter.username}" /></a>
+                        </p:column>
+                        <p:column headerText="Kweet">
+                            <h:outputText value="#{kweet.content}" />
+                        </p:column>
+                        <p:column headerText="Kweet">
+                            <h:outputText value="#{kweet.date}" />
+                        </p:column>
+                    </p:dataTable>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <p:panel id="basic" header="Latest kweet" footer="#{startController.user.username}" style="margin-bottom:20px">
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <img src="#{startController.userpicture}" />
+                            <h:outputText
+                                value="#{startController.lastKweet.content}" />
+                        </h:panelGrid>
+                    </p:panel>
+                    Following: #{startController.following}, followers: #{startController.followers}
+                </p:layoutUnit>
+            </p:layout>
+        </h:form>
+        <script>
+            var ws = new WebSocket("ws://127.0.0.1:8080/Kwetter/kweetsocket?#{startController.user.id}");
+            ws.onmessage = function (event) {
+                console.log(event.data);
+                $(".ui-datatable-data").append(event.data);
+                //$('#j_idt13:kweetTable tr:last').after(event.data);
+            }
+            function sendKweet(){
+                ws.send($(".tbNewKweet").val());
+            }
+            function onMessage() {
+
+            }
+        </script>
+
+
+    </h:body>
+
+</html>
+
