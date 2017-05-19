@@ -5,17 +5,12 @@
  */
 package kwetterdesktop;
 
-import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jms.ConnectionFactory;
-import javax.jms.JMSConsumer;
 import javax.jms.JMSContext;
 import javax.jms.JMSProducer;
-import javax.jms.Message;
-import javax.jms.MessageListener;
 import javax.jms.Queue;
-import javax.jms.TextMessage;
 import javax.jms.Topic;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -36,6 +31,9 @@ public class Main {
      * create the topic before running this class
      */
     private static final String JNDI_TOPIC = "jms/KwetterGo/queue";
+    
+    
+
 
     /**
      * @param <T> the return type
@@ -59,14 +57,18 @@ public class Main {
 
         final ConnectionFactory connectionFactory = lookup(ConnectionFactory.class, JNDI_CONNECTION_FACTORY);
         final Queue queue = lookup(Queue.class, JNDI_TOPIC);
+        
+        String text = "TestTweet from desktop app";
         //JMSContext implements AutoClosable: let us try 'try-with-resources'
         //see http://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html
         try (JMSContext jmsContext = connectionFactory.createContext()) {
-
             final JMSProducer producer = jmsContext.createProducer();
-            String text = "TestTweet from desktop app";
             producer.send(queue, text);
-            LOG.log(Level.INFO, "sent {0} to {1}", new Object[]{text, JNDI_TOPIC});    
+            
+            LOG.log(Level.INFO, "Normal Queue");  
+        }
+        catch(Exception ex){
+            LOG.log(Level.INFO, "DLQ");  
         }
     }
     

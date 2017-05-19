@@ -6,6 +6,7 @@
 package domain;
 
 import java.io.Serializable;
+import java.net.URI;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,7 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.Temporal;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -40,7 +41,11 @@ public class Tweet implements Serializable {
     private int tweetHearts;
     
     @ManyToOne
+    @XmlTransient
     private User tweetOwner;
+    
+
+    private URI owner;
     
     //@OneToMany(mappedBy = "tweet")
     //private List<User> hearters;
@@ -63,6 +68,8 @@ public class Tweet implements Serializable {
         tweetTimestamp = new Date();
         owner.createTweet(this);
     }
+    
+    
     
     public void setText(String text){
         tweetText = text;
@@ -95,6 +102,16 @@ public class Tweet implements Serializable {
     public void setOwner(User owner){
         this.tweetOwner = owner;
     }
+    
+    public URI getOwnerLink(){
+        return this.owner;
+    }
+    
+    public void setOwnerLink(URI link){
+        this.owner = link;
+    }
+    
+    
   /*  
     public void addHeart(User hearter){
         if(hearters.contains(hearter)){

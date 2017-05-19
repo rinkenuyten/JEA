@@ -67,6 +67,9 @@ public class TweetService {
                 List<Tweet> result = this.getTweetByUserId(user.getId());
                 feedlist.addAll(result);
             }
+            for (Tweet tweet : u.getTweets()){
+                feedlist.add(tweet);
+            }
         return feedlist;
     }
 }

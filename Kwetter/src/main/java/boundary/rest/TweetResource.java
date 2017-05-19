@@ -16,8 +16,12 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Link;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 import service.TweetService;
 import service.UserService;
@@ -45,10 +49,33 @@ public class TweetResource {
     
     @GET
     @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
     public Tweet getTweet(@PathParam("id") long id){
         Tweet tweet = ts.getTweetById(id);
+        
+        User user = tweet.getOwner();
+        /*tweet.setSelf(
+                Link.fromUri(uriInfo.getBaseUriBuilder()
+                    .path(getClass()).path(getClass(), "getOwner")
+                    .build(tweet.getId())).rel("tweet").type("GET").build());
+        */
+        URI uri = null;
+        if (tweet != null) {
+            uri = UriBuilder.fromUri("http://localhost:8080/Kwetter/api/user/")
+                    .path(tweet.getOwner().getUserName().toString())
+                    .build();
+            /*uri = uriInfo.getAbsolutePathBuilder().
+                    path(tweet.getOwner().getId().toString()).
+                    build();*/
+        }
+        tweet.setOwnerLink(uri);
+        
         return tweet;
+
+       // return Response.accepted(tweet).build();
     }
+    
+    
     
     @GET
     @Path("{id}/user")
@@ -69,10 +96,18 @@ public class TweetResource {
     
     @POST
     @Path("{id}/{text}")
-    public void add(@PathParam("id") long id, @PathParam("text") String texttweet){
+    public Response add(@PathParam("id") long id, @PathParam("text") String texttweet){
         User result = us.getUserById(id);
         System.out.println(texttweet);
-        ts.createTweet(texttweet, result);
+        Tweet tweet = ts.createTweet(texttweet, result);
+        
+        URI uri = null;
+        if (tweet != null) {
+            uri = uriInfo.getAbsolutePathBuilder().
+                    path(tweet.getId().toString()).
+                    build();
+        }
+        return Response.created(uri).build();
     }
     
     @POST
